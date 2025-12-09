@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Computer Science Student & Web Developer</title>
+    <style>
+        :root {
+            --color-primary: #32b8c6;
+            --color-primary-hover: #1d745f;
+            --color-bg: #0f1419;
+            --color-surface: #1a1f2e;
+            --color-text: #e0e6ed;
+            --color-text-muted: #a0afc0;
+            --color-accent: #ff6b6b;
+            --color-success: #51cf66;
+            --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(50, 184, 198, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(50, 184, 198, 0.05) 0%, rgba(255, 107, 107, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(50, 184, 198, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(50, 184, 198, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(50, 184, 198, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--color-text);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--color-primary);
+            margin: 1rem auto 0;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(50, 184, 198, 0.03) 0%, rgba(255, 107, 107, 0.03) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(50, 184, 198, 0.1);
+            border: 1px solid rgba(50, 184, 198, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            transition: all var(--transition);
+            text-align: center;
+        }
+
+        .skill-tag:hover {
+            background: rgba(50, 184, 198, 0.2);
+            border-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(50, 184, 198, 0.1);
+            transition: all var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(50, 184, 198, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(50, 184, 198, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(50, 184, 198, 0.3);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .project-content p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: var(--color-accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .project-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            color: var(--color-accent);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(50, 184, 198, 0.03) 0%, rgba(255, 107, 107, 0.03) 100%);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .contact-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(50, 184, 198, 0.1);
+            border: 2px solid rgba(50, 184, 198, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--color-primary);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid rgba(50, 184, 198, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-brand">Rahul Kumar</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Rahul Kumar</h1>
+            <p>Frontend Engineer | Full-Stack Developer | React & Node.js Specialist</p>
+            <p style="font-size: 1rem; margin-top: 0.5rem;">Building modern web applications with clean code and exceptional UX design.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#projects" class="btn btn-secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Hi there! 👋</h3>
+                <p>I'm Rahul Kumar, a passionate Frontend Engineer and Full-Stack Developer currently studying at GITAM University (CSBS, GPA: 8.29). I specialize in building responsive, user-centric web applications with modern technologies like React, Node.js, and JavaScript.</p>
+                <p>My expertise spans the entire web development lifecycle—from designing intuitive UIs with Figma to implementing robust backends with RESTful APIs. I'm driven by creating elegant solutions to complex problems and continuously learning new technologies. When I'm not coding, you'll find me exploring emerging tech trends or gaming!</p>
+                <h3 style="margin-top: 1.5rem;">Technical Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">React.js</div>
+                    <div class="skill-tag">JavaScript (ES6+)</div>
+                    <div class="skill-tag">Node.js</div>
+                    <div class="skill-tag">HTML5/CSS3</div>
+                    <div class="skill-tag">MongoDB</div>
+                    <div class="skill-tag">RESTful APIs</div>
+                    <div class="skill-tag">Figma</div>
+                    <div class="skill-tag">Git & GitHub</div>
+                </div>
+            </div>
+            <div class="about-text" style="border-left: 2px solid rgba(50, 184, 198, 0.2); padding-left: 2rem;">
+                <h3>What I'm Currently Working On</h3>
+                <p>💻 Full-stack web development projects with React and Node.js</p>
+                <p>🎨 UI/UX design and implementation with modern design tools</p>
+                <p>🔗 Building responsive, accessible web applications</p>
+                <p>📱 Learning advanced frontend patterns and performance optimization</p>
+                <h3 style="margin-top: 1.5rem;">Education</h3>
+                <p><strong>B.Tech CSBS Program</strong><br>GITAM University<br><strong>GPA:</strong> 8.29<br><strong>Focus:</strong> Full-Stack Web Development</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-size: 2.5rem;">📖</div>
+                <div class="project-content">
+                    <h3>Easy2Learn - LMS for Rural Schools</h3>
+                    <p>Designed and developed an accessible Learning Management System tailored for rural schools with offline support and low-bandwidth optimization. Features secure role-based access, lesson management, and assignment tracking.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">Figma</span>
+                    </div>
+                    <a href="https://github.com/Rahuldhuwaria" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); font-size: 2.5rem;">🏪</div>
+                <div class="project-content">
+                    <h3>UniTrade - University Marketplace</h3>
+                    <p>Built responsive marketplace platform featuring real-time chat UI, user dashboards, and optimized performance. Implemented modern React components with focus on UX and accessibility.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React.js</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Responsive Design</span>
+                    </div>
+                    <a href="https://github.com/Rahuldhuwaria" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); font-size: 2.5rem;">⚕️</div>
+                <div class="project-content">
+                    <h3>Medicine Recommending System</h3>
+                    <p>Built a machine learning-based recommendation system to suggest medicines based on symptoms. Integrated with Streamlit for user-friendly UI with symptom input and prediction display.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Scikit-learn</span>
+                        <span class="project-tag">Streamlit</span>
+                    </div>
+                    <a href="https://github.com/Rahuldhuwaria" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); font-size: 2.5rem;">💻</div>
+                <div class="project-content">
+                    <h3>Portfolio Website</h3>
+                    <p>Designed and developed a clean, modern personal portfolio using HTML, CSS, and JavaScript. Features smooth animations, interactive UI components, and fully responsive design.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML5</span>
+                        <span class="project-tag">CSS3</span>
+                        <span class="project-tag">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/Rahuldhuwaria" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out if you'd like to collaborate or just chat about tech!</p>
+            <a href="mailto:rahuldhuwaria@gmail.com" class="btn btn-primary">Send Email</a>
+            <div class="social-links">
+                <a href="https://github.com/Rahuldhuwaria" class="social-link" title="GitHub">🐙</a>
+                <a href="https://www.linkedin.com/in/rahuldhuwaria" class="social-link" title="LinkedIn">💼</a>
+                <a href="tel:+918875458570" class="social-link" title="Call">☎️</a>
+                <a href="mailto:rahuldhuwaria@gmail.com" class="social-link" title="Email">✉️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Rahul Kumar. All rights reserved. | Frontend Engineer | Built with ❤️</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-tag').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
